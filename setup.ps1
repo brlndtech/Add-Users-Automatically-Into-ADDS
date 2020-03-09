@@ -136,3 +136,5 @@ $answer=Read-Host "Answer "
 }
 Write-Host ""
 Write-Host "I Hope that the program has runed good for you (:"
+pause
+Write-Host ""
