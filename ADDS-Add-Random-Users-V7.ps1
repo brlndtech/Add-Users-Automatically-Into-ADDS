@@ -8,13 +8,11 @@
 
 ######################################################
 
-# Site géographique de base : Paris,Lyon,Marseille 
-# A changer ctrl h dans le csv user-random.csv
+# Basic Department : Info,Compta,Juridique (user-random.csv)
+# Services de base : Paris, Lyon, Marseille (user-random.csv)
 
-# Site géographiqu de base : Paris,Lyon,Marseille 
-# A changer ctrl h dans le csv user-random.csv
-
-
+# Basic geographic site: Paris, Lyon, Marseille (user-random.csv)
+# Site géographique de base : Paris, Lyon, Marseille (user-random.csv)
 
 Import-Module ActiveDirectory
 Import-Module 'Microsoft.PowerShell.Security'
@@ -22,8 +20,8 @@ Import-Module 'Microsoft.PowerShell.Security'
 $users = Import-Csv -Delimiter ";" -Path "users-random.csv"
 
 
-$netbios=Read-Host "Entrez le NetBIOS de votre domaine (ex : entreprise) "
-$domain=Read-Host "Entrez votre .tld (ex : .com) "
+$netbios=Read-Host "Enter the netbios of your domain (ex : company) "
+$domain=Read-Host "Enter the .tld (ex : .com) "
 
 
     New-ADOrganizationalUnit -Name "Sites" -Path "dc=$netbios,dc=$domain"
@@ -71,7 +69,7 @@ $domain=Read-Host "Entrez votre .tld (ex : .com) "
     New-ADOrganizationalUnit -Name "Locaux" -Path "ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
 
 
-#*******Ajout de chaque utilisateur dans son OU spécifique*******
+#*******Ajout de chaque utilisateur dans son OU spécifique *******
 
 foreach ($user in $users) {
     
@@ -86,18 +84,18 @@ foreach ($user in $users) {
     If ($user.office -eq "$site1") {
         switch($user.department)
         {
-            "$service1" {$office = "OU=$service1,OU=Services,OU=$site1,OU=Sites,DC=$netbios,DC=$domain"} # à modifier, pour adpater à sa sauce 
-            "$service2" {$office = "OU=$service2,OU=Services,OU=$site1,OU=Sites,DC=$netbios,DC=$domain"} # à modifier, pour adpater à sa sauce
-            "$service3" {$office = "OU=$service3,OU=Services,OU=$site1,OU=Sites,DC=$netbios,DC=$domain"} # à modifier, pour adpater à sa sauce 
+            "$service1" {$office = "OU=$service1,OU=Services,OU=$site1,OU=Sites,DC=$netbios,DC=$domain"}  
+            "$service2" {$office = "OU=$service2,OU=Services,OU=$site1,OU=Sites,DC=$netbios,DC=$domain"} 
+            "$service3" {$office = "OU=$service3,OU=Services,OU=$site1,OU=Sites,DC=$netbios,DC=$domain"}  
 
         }
     }
     ElseIf ($user.office -eq "$site2") {
         switch($user.department)
         {
-            "$service1" {$office = "OU=$service1,OU=Services,OU=$site2,OU=Sites,DC=$netbios,DC=$domain"} # à modifier, pour adpater à sa sauce
-            "$service2" {$office = "OU=$service2,OU=Services,OU=$site2,OU=Sites,DC=$netbios,DC=$domain"} # à modifier, pour adpater à sa sauce
-            "$service3" {$office = "OU=$service3,OU=Services,OU=$site2,OU=Sites,DC=$netbios,DC=$domain"} # à modifier, pour adpater à sa sauce 
+            "$service1" {$office = "OU=$service1,OU=Services,OU=$site2,OU=Sites,DC=$netbios,DC=$domain"} 
+            "$service2" {$office = "OU=$service2,OU=Services,OU=$site2,OU=Sites,DC=$netbios,DC=$domain"} 
+            "$service3" {$office = "OU=$service3,OU=Services,OU=$site2,OU=Sites,DC=$netbios,DC=$domain"}  
 
 
         }
@@ -105,20 +103,20 @@ foreach ($user in $users) {
     ElseIf ($user.office -eq "$site3") {
         switch($user.department)
         {
-            "$service1" {$office = "OU=$service1,OU=Services,OU=$site3,OU=Sites,DC=$netbios,DC=$domain"} # à modifier, pour adpater à sa sauce
-            "$service2" {$office = "OU=$service2,OU=Services,OU=$site3,OU=Sites,DC=$netbios,DC=$domain"} # à modifier, pour adpater à sa sauce 
-            "$service3" {$office = "OU=$service3,OU=Services,OU=$site3,OU=Sites,DC=$netbios,DC=$domain"} # à modifier, pour adpater à sa sauce 
+            "$service1" {$office = "OU=$service1,OU=Services,OU=$site3,OU=Sites,DC=$netbios,DC=$domain"} 
+            "$service2" {$office = "OU=$service2,OU=Services,OU=$site3,OU=Sites,DC=$netbios,DC=$domain"}  
+            "$service3" {$office = "OU=$service3,OU=Services,OU=$site3,OU=Sites,DC=$netbios,DC=$domain"}  
 
         }
     }
     
      try {
             New-ADUser -Name $name -SamAccountName $login -UserPrincipalName $login -DisplayName $name -GivenName $fname -Surname $lname -AccountPassword (ConvertTo-SecureString $Upassword -AsPlainText -Force) -City $Uoffice -Path $office -Department $dept -Enabled $true
-            echo "Utilisateur ajouté : $name"
+            Write-Output "The user : $name has been added "
           
            
         } catch{
-            echo "-Utilisateur non ajouté : $name"
+            Write-Output "!- The user $name has not been added"
        }   
 
 }
@@ -144,7 +142,7 @@ New-ADGroup -Name "G-$service2-$site3" -GroupScope Global -GroupCategory Securit
 New-ADGroup -Name "G-$service3-$site3" -GroupScope Global -GroupCategory Security -Path "ou=Globaux,ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
 
 
-foreach ($user in $users){
+foreach ($user in $users) {
 
     $name = $user.firstName + " " + $user.lastName
     $fname = $user.firstName
@@ -160,19 +158,19 @@ foreach ($user in $users){
     if ($Uoffice -eq "$site1" -and $dept -eq "$service1"){
 
         Add-ADGroupMember -Identity "G-$service1-$site1" -Members $login
-        echo "$name a été ajouté au groupe G-$service1-$site1"
+        Write-Output "$name has been added to the group : G-$service1-$site1"
 
     }
     elseif ($Uoffice -eq "$site1" -and $dept -eq "$service2"){
 
         Add-ADGroupMember -Identity "G-$service2-$site1" -Members $login
-        echo "$name a été ajouté au groupe G-$service2-$site1"
+        Write-Output "$name has been added to the group : G-$service2-$site1"
 
     }
     elseif ($Uoffice -eq "$site1" -and $dept -eq "$service3"){
 
         Add-ADGroupMember -Identity "G-$service3-$site1" -Members $login
-        echo "$name a été ajouté au groupe G-$service3-$site1"
+        Write-Output "$name has been added to the group : G-$service3-$site1"
 
     }
 
@@ -182,19 +180,19 @@ foreach ($user in $users){
     if ($Uoffice -eq "$site2" -and $dept -eq "$service1"){
 
         Add-ADGroupMember -Identity "G-$service1-$site2" -Members $login
-        echo "$name a été ajouté au groupe G-$service1-$site2"
+        Write-Output "$name has been added to the group : G-$service1-$site2"
 
     }
     elseif ($Uoffice -eq "$site2" -and $dept -eq "$service2"){
 
         Add-ADGroupMember -Identity "G-$service2-$site2" -Members $login
-        echo "$name a été ajouté au groupe G-$service2-$site2"
+        Write-Output "$name has been added to the group : G-$service2-$site2"
 
     }
     elseif ($Uoffice -eq "$site2" -and $dept -eq "$service3"){
 
         Add-ADGroupMember -Identity "G-$service3-$site2" -Members $login
-        echo "$name a été ajouté au groupe G-$service3-$site2"
+        Write-Output "$name has been added to the group : G-$service3-$site2"
 
     }
 
@@ -205,25 +203,26 @@ foreach ($user in $users){
     if ($Uoffice -eq "$site3" -and $dept -eq "$service1"){
 
         Add-ADGroupMember -Identity "G-$service1-$site3" -Members $login
-        echo "$name a été ajouté au groupe G-$service1-$site3"
+        Write-Output "$name has been added to the group : G-$service1-$site3"
 
     }
     elseif ($Uoffice -eq "$site3" -and $dept -eq "$service2"){
 
         Add-ADGroupMember -Identity "G-$service2-$site3" -Members $login
-        echo "$name a été ajouté au groupe G-$service2-$site3"
+        Write-Output "$name has been added to the group : G-$service2-$site3"
 
     }
     elseif ($Uoffice -eq "$site3" -and $dept -eq "$service3"){
 
         Add-ADGroupMember -Identity "G-$service3-$site3" -Members $login
-        echo "$name a été ajouté au groupe G-$service3-$site3"
+        Write-Output "$name has been added to the group : G-$service3-$site3"
 
     }
 
 
-} #Accolade fermante de notre boucle – Fin de la boucle
+}
 
 Add-ADGroupMember -Identity "G-InterSite-$service1" -Members "G-$service1-$site1","G-$service1-$site2","G-$service1-$site3"
 Add-ADGroupMember -Identity "G-InterSite-$service2" -Members "G-$service2-$site1","G-$service2-$site2","G-$service2-$site3"
 Add-ADGroupMember -Identity "G-InterSite-$service3" -Members "G-$service3-$site1","G-$service3-$site2","G-$service3-$site3"
+pause

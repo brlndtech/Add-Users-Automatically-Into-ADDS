@@ -8,15 +8,15 @@
 
 ######################################################
 
-# Site géographique de base : Paris,Lyon,Marseille 
-# A changer ctrl h dans le csv user-random.csv
+# Basic Department : Info,Compta,Juridique (user-random.csv)
+# Services de base : Paris, Lyon, Marseille (user-random.csv)
 
-# Site géographique de base : Paris,Lyon,Marseille 
-# A changer ctrl h dans le csv user-random.csv
+# Basic geographic site: Paris, Lyon, Marseille (user-random.csv)
+# Site géographique de base : Paris, Lyon, Marseille (user-random.csv)
 
 Import-Module ActiveDirectory
 Import-Module 'Microsoft.PowerShell.Security'
-cls
+Clear-Host
 Write-Host "*********************************"
 Write-Host "* CREATE AND POPULATE YOUR ADDS *"
 Write-Host "*   ~ A script by brlndtech ~   *"
@@ -47,13 +47,13 @@ $answer=Read-Host "Answer "
         }
         2 {
     
-        $site1=Read-Host "Entrez le nom de votre premier site "
-        $site2=Read-Host "Entrez le nom de votre deuxième site "
-        $site3=Read-Host "Entrez le nom de votre troisième site "
+        $site1=Read-Host "Enter the name of your first site "
+        $site2=Read-Host "Enter the name of your second site "
+        $site3=Read-Host "Enter the name of your third site "
 
-        $service1=Read-Host "Entrez le nom de votre premier service "
-        $service2=Read-Host "Entrez le nom de votre deuxième service "
-        $service3=Read-Host "Entrez le nom de votre troisième service "
+        $service1=Read-Host "Enter the name of your first service "
+        $service2=Read-Host "Enter the name of your second service "
+        $service3=Read-Host "Enter the name of your third service "
 
         (Get-Content -Path .\users-random.csv) |
         ForEach-Object {$_ -Replace 'Lyon', $site1} |
@@ -89,7 +89,7 @@ $answer=Read-Host "Answer "
 
         . '.\ADDS-Add-Random-Users-V7.ps1'
 
-        # et on remet le fichier comme avant (avec les sites / services par défaut)
+        # et on remet le fichier comme avant (avec les sites géographiques/ services par défaut)
 
 
         (Get-Content -Path .\users-random.csv) |
@@ -126,7 +126,7 @@ $answer=Read-Host "Answer "
     
         }
         default {
-        cls
+        Clear-Host
         Write-Host "Please, dont be a chill :( "
         Write-Host "1) Use the default option for deploy an non-custom ADDS Tree"
         Write-Host "2) Use this option if you want to custom 3 specific sites and services"
