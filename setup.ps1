@@ -86,11 +86,17 @@ $answer=Read-Host "Answer "
         Get-Content -Path .\users-random.csv
 
         # le changement des sites / services a été éfféctué, maintenant, nous apellons le script principal :) 
-
+        
+        Write-Host ""
+        Write-Host "3 sites and 3 services has been successfully added. now the users and groups are going to be implemented ... "
+        pause
         . '.\ADDS-Add-Random-Users-V7.ps1'
 
         # et on remet le fichier comme avant (avec les sites géographiques/ services par défaut)
 
+        Write-Host ""
+        Write-Host "The users and groups has been added. Now the user-random.csv will be overwritten with his initial version"
+        pause
 
         (Get-Content -Path .\users-random.csv) |
         ForEach-Object {$_ -Replace $site1, 'Paris' } |
@@ -135,6 +141,6 @@ $answer=Read-Host "Answer "
     }
 }
 Write-Host ""
-Write-Host "I Hope that the program has runed good for you (:"
+Write-Host "I Hope that the program has runed good for you (: - Bye bye"
 pause
 Write-Host ""

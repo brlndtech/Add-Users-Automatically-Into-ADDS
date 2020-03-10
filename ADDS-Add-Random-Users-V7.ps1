@@ -19,15 +19,14 @@ Import-Module 'Microsoft.PowerShell.Security'
 
 $users = Import-Csv -Delimiter ";" -Path "users-random.csv"
 
-
+########## DEBUT 
 $netbios=Read-Host "Enter the netbios of your domain (ex : company) "
 $domain=Read-Host "Enter the .tld (ex : .com) "
 
-
+    #*******  OU racine *******
     New-ADOrganizationalUnit -Name "Sites" -Path "dc=$netbios,dc=$domain"
 
     #******* $site1 *******
-
     New-ADOrganizationalUnit -Name "$site1" -Path "ou=Sites,dc=$netbios,dc=$domain"
     New-ADOrganizationalUnit -Name "Services" -Path "ou=$site1,ou=Sites,dc=$netbios,dc=$domain"
     New-ADOrganizationalUnit -Name "$service1" -Path "ou=Services,ou=$site1,ou=Sites,dc=$netbios,dc=$domain"
@@ -39,7 +38,6 @@ $domain=Read-Host "Enter the .tld (ex : .com) "
     New-ADOrganizationalUnit -Name "Imprimantes" -Path "ou=Materiels,ou=$site1,ou=Sites,dc=$netbios,dc=$domain"
 
     #******* $site2 *******
-
     New-ADOrganizationalUnit -Name "$site2" -Path "ou=Sites,dc=$netbios,dc=$domain"
     New-ADOrganizationalUnit -Name "Services" -Path "ou=$site2,ou=Sites,dc=$netbios,dc=$domain"
     New-ADOrganizationalUnit -Name "$service1" -Path "ou=Services,ou=$site2,ou=Sites,dc=$netbios,dc=$domain"
@@ -51,7 +49,6 @@ $domain=Read-Host "Enter the .tld (ex : .com) "
     New-ADOrganizationalUnit -Name "Imprimantes" -Path "ou=Materiels,ou=$site2,ou=Sites,dc=$netbios,dc=$domain"
 
     #******* $site3 *******
-
     New-ADOrganizationalUnit -Name "$site3" -Path "ou=Sites,dc=$netbios,dc=$domain"
     New-ADOrganizationalUnit -Name "Services" -Path "ou=$site3,ou=Sites,dc=$netbios,dc=$domain"
     New-ADOrganizationalUnit -Name "$service1" -Path "ou=Services,ou=$site3,ou=Sites,dc=$netbios,dc=$domain"
@@ -63,14 +60,12 @@ $domain=Read-Host "Enter the .tld (ex : .com) "
     New-ADOrganizationalUnit -Name "Imprimantes" -Path "ou=Materiels,ou=$site3,ou=Sites,dc=$netbios,dc=$domain"
 
     #******* Création des OU Groupes *******
-
     New-ADOrganizationalUnit -Name "Groupes" -Path "ou=Sites,dc=$netbios,dc=$domain"
     New-ADOrganizationalUnit -Name "Globaux" -Path "ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
     New-ADOrganizationalUnit -Name "Locaux" -Path "ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
 
 
 #*******Ajout de chaque utilisateur dans son OU spécifique *******
-
 foreach ($user in $users) {
     
     $name = $user.firstName + " " + $user.lastName
@@ -135,7 +130,6 @@ New-ADGroup -Name "G-$service1-$site1" -GroupScope Global -GroupCategory Securit
 New-ADGroup -Name "G-$service2-$site1" -GroupScope Global -GroupCategory Security -Path "ou=Globaux,ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
 New-ADGroup -Name "G-$service3-$site1" -GroupScope Global -GroupCategory Security -Path "ou=Globaux,ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
 
-
 #*********************Groupes sous $site3************************
 New-ADGroup -Name "G-$service1-$site3" -GroupScope Global -GroupCategory Security -Path "ou=Globaux,ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
 New-ADGroup -Name "G-$service2-$site3" -GroupScope Global -GroupCategory Security -Path "ou=Globaux,ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
@@ -153,7 +147,6 @@ foreach ($user in $users) {
     $dept = $user.department 
 
 #********Ajout des users de $site1 dans leurs groupes********************
-
 
     if ($Uoffice -eq "$site1" -and $dept -eq "$service1"){
 
@@ -173,7 +166,6 @@ foreach ($user in $users) {
         Write-Output "$name has been added to the group : G-$service3-$site1"
 
     }
-
 
 #********Ajout des utilisateurs de $site2 dans leurs groupes********************
 
@@ -196,9 +188,7 @@ foreach ($user in $users) {
 
     }
 
-
     #********Ajout des users de $site3 dans leurs groupes********************
-
 
     if ($Uoffice -eq "$site3" -and $dept -eq "$service1"){
 
@@ -225,4 +215,3 @@ foreach ($user in $users) {
 Add-ADGroupMember -Identity "G-InterSite-$service1" -Members "G-$service1-$site1","G-$service1-$site2","G-$service1-$site3"
 Add-ADGroupMember -Identity "G-InterSite-$service2" -Members "G-$service2-$site1","G-$service2-$site2","G-$service2-$site3"
 Add-ADGroupMember -Identity "G-InterSite-$service3" -Members "G-$service3-$site1","G-$service3-$site2","G-$service3-$site3"
-pause
