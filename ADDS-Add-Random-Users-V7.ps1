@@ -125,16 +125,15 @@ New-ADGroup -Name "G-InterSite-$service1" -GroupScope Global -GroupCategory Secu
 New-ADGroup -Name "G-InterSite-$service2" -GroupScope Global -GroupCategory Security -Path "ou=Globaux,ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
 New-ADGroup -Name "G-InterSite-$service3" -GroupScope Global -GroupCategory Security -Path "ou=Globaux,ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
 
-#*********************Groupes sous $site2************************
-New-ADGroup -Name "G-$service1-$site2" -GroupScope Global -GroupCategory Security -Path "ou=Globaux,ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
-New-ADGroup -Name "G-$service2-$site2" -GroupScope Global -GroupCategory Security -Path "ou=Globaux,ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
-New-ADGroup -Name "G-$service3-$site2" -GroupScope Global -GroupCategory Security -Path "ou=Globaux,ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
-
 #*********************Groupes sous $site1************************
 New-ADGroup -Name "G-$service1-$site1" -GroupScope Global -GroupCategory Security -Path "ou=Globaux,ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
 New-ADGroup -Name "G-$service2-$site1" -GroupScope Global -GroupCategory Security -Path "ou=Globaux,ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
 New-ADGroup -Name "G-$service3-$site1" -GroupScope Global -GroupCategory Security -Path "ou=Globaux,ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
 
+#*********************Groupes sous $site2************************
+New-ADGroup -Name "G-$service1-$site2" -GroupScope Global -GroupCategory Security -Path "ou=Globaux,ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
+New-ADGroup -Name "G-$service2-$site2" -GroupScope Global -GroupCategory Security -Path "ou=Globaux,ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
+New-ADGroup -Name "G-$service3-$site2" -GroupScope Global -GroupCategory Security -Path "ou=Globaux,ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
 
 #*********************Groupes sous $site3************************
 New-ADGroup -Name "G-$service1-$site3" -GroupScope Global -GroupCategory Security -Path "ou=Globaux,ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"

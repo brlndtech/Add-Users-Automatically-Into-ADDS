@@ -39,8 +39,8 @@ $answer=Read-Host "Answer "
         $site3="Marseille"
 
         $service1="Info"
-        $service2="Juridique"
-        $service3="Compta"
+        $service2="Compta"
+        $service3="Juridique"
 
         . '.\ADDS-Add-Random-Users-V7.ps1'
         $a = 0
@@ -56,17 +56,17 @@ $answer=Read-Host "Answer "
         $service3=Read-Host "Enter the name of your third service "
 
         (Get-Content -Path .\users-random.csv) |
-        ForEach-Object {$_ -Replace 'Lyon', $site1} |
+        ForEach-Object {$_ -Replace 'Paris', $site1} |
         Set-Content -Path .\users-random.csv
         Get-Content -Path .\users-random.csv
 
         (Get-Content -Path .\users-random.csv) |
-        ForEach-Object {$_ -Replace 'Marseille', $site2} |
+        ForEach-Object {$_ -Replace 'Lyon', $site2} |
         Set-Content -Path .\users-random.csv
         Get-Content -Path .\users-random.csv
 
         (Get-Content -Path .\users-random.csv) |
-        ForEach-Object {$_ -Replace 'Paris', $site3} |
+        ForEach-Object {$_ -Replace 'Marseille', $site3} |
         Set-Content -Path .\users-random.csv
         Get-Content -Path .\users-random.csv
 
@@ -76,12 +76,12 @@ $answer=Read-Host "Answer "
         Get-Content -Path .\users-random.csv
 
         (Get-Content -Path .\users-random.csv) |
-        ForEach-Object {$_ -Replace 'Juridique', $service2} |
+        ForEach-Object {$_ -Replace 'Compta', $service2} |
         Set-Content -Path .\users-random.csv
         Get-Content -Path .\users-random.csv
 
         (Get-Content -Path .\users-random.csv) |
-        ForEach-Object {$_ -Replace 'Compta', $service3} |
+        ForEach-Object {$_ -Replace 'Juridique', $service3} |
         Set-Content -Path .\users-random.csv
         Get-Content -Path .\users-random.csv
 
