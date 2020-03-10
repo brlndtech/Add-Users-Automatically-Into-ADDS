@@ -20,7 +20,7 @@ git clone https://github.com/brlndtech/
 
 ## Recommandation
 
-If you choose the option 2), be noticed that you should add other cities than Paris,Lyon,Marseille and other services than Info,Compta,Juridique. 
+If you choose the option 2), **be noticed that you should add other cities than Paris,Lyon,Marseille and other services than Info,Compta,Juridique.** 
 
 #### <center>Brlndtech &copy; 2020</center>
 
