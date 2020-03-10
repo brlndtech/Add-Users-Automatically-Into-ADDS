@@ -21,7 +21,7 @@ $users = Import-Csv -Delimiter ";" -Path "users-random.csv"
 
 ########## DEBUT 
 $netbios=Read-Host "Enter the netbios of your domain (ex : company) "
-$domain=Read-Host "Enter the .tld (ex : .com) "
+$domain=Read-Host "Enter the .tld (ex : com) "
 
     #*******  OU racine *******
     New-ADOrganizationalUnit -Name "Sites" -Path "dc=$netbios,dc=$domain"
