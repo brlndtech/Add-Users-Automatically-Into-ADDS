@@ -22,14 +22,8 @@ Options :
 ## Recommandation
 
 WARNING ! <br>
-If you choose the option 2), **be noticed that you should add other cities than Paris,Lyon,Marseille and other services than Info,Compta,Juridique.**
+If you choose the option 2), **be noticed that you should add other cities than Paris,Lyon,Marseille and other services than Info,Compta,Juridique.** 
 
-For example :
-
-Sites : Amsterdam,Londres,Bruxelles <br>
-Services : Computer,Accountance,Juridical
-
-note : If you run the program several time, you should remplace user-random.csv, if you meet strange errors ... #PowerShellHasBeenCodedBySysAdmins ... 
 If you have a problem with the script, don't hesitate to run again the inital script from the github depot, and open an <a href="https://github.com/brlndtech/add-random-users-into-your-adds/issues" >issue. </a>
 
 #### <center>Brlndtech &copy; 2020</center>

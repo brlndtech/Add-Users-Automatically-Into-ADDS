@@ -27,7 +27,6 @@ $domain=Read-Host "Enter the .tld (ex : com) "
     New-ADOrganizationalUnit -Name "Sites" -Path "dc=$netbios,dc=$domain"
 
     #******* $site1 *******
-
     New-ADOrganizationalUnit -Name "$site1" -Path "ou=Sites,dc=$netbios,dc=$domain"
     New-ADOrganizationalUnit -Name "Services" -Path "ou=$site1,ou=Sites,dc=$netbios,dc=$domain"
     New-ADOrganizationalUnit -Name "$service1" -Path "ou=Services,ou=$site1,ou=Sites,dc=$netbios,dc=$domain"
@@ -39,7 +38,6 @@ $domain=Read-Host "Enter the .tld (ex : com) "
     New-ADOrganizationalUnit -Name "Imprimantes" -Path "ou=Materiels,ou=$site1,ou=Sites,dc=$netbios,dc=$domain"
 
     #******* $site2 *******
-
     New-ADOrganizationalUnit -Name "$site2" -Path "ou=Sites,dc=$netbios,dc=$domain"
     New-ADOrganizationalUnit -Name "Services" -Path "ou=$site2,ou=Sites,dc=$netbios,dc=$domain"
     New-ADOrganizationalUnit -Name "$service1" -Path "ou=Services,ou=$site2,ou=Sites,dc=$netbios,dc=$domain"
@@ -51,7 +49,6 @@ $domain=Read-Host "Enter the .tld (ex : com) "
     New-ADOrganizationalUnit -Name "Imprimantes" -Path "ou=Materiels,ou=$site2,ou=Sites,dc=$netbios,dc=$domain"
 
     #******* $site3 *******
-
     New-ADOrganizationalUnit -Name "$site3" -Path "ou=Sites,dc=$netbios,dc=$domain"
     New-ADOrganizationalUnit -Name "Services" -Path "ou=$site3,ou=Sites,dc=$netbios,dc=$domain"
     New-ADOrganizationalUnit -Name "$service1" -Path "ou=Services,ou=$site3,ou=Sites,dc=$netbios,dc=$domain"
@@ -63,7 +60,6 @@ $domain=Read-Host "Enter the .tld (ex : com) "
     New-ADOrganizationalUnit -Name "Imprimantes" -Path "ou=Materiels,ou=$site3,ou=Sites,dc=$netbios,dc=$domain"
 
     #******* Création des OU Groupes *******
-
     New-ADOrganizationalUnit -Name "Groupes" -Path "ou=Sites,dc=$netbios,dc=$domain"
     New-ADOrganizationalUnit -Name "Globaux" -Path "ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
     New-ADOrganizationalUnit -Name "Locaux" -Path "ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
