@@ -41,10 +41,24 @@ foreach ($partage in $partages)
 {
     foreach($rightType in $rightTypes)
     {
-       $groupName0 = "DL-$($partage)-$($rightType)"
+       $groupName0 = "DL-$($partage)-$($rootSites)-$($rightType)"
        Write-Host $groupName0
        New-ADGroup -Name "$groupName0" -GroupScope DomainLocal -GroupCategory Security -Path "ou=Locaux,ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
        Write-Host "Creating $($groupName0)"
+    }
+}
+
+foreach ($partage in $partages) 
+{
+    foreach ($rootSite in $rootSites) 
+    {
+        foreach($rightType in $rightTypes)
+        {
+           $groupName0 = "DL-$($partage)-$($rightType)"
+           Write-Host $groupName0
+           New-ADGroup -Name "$groupName0" -GroupScope DomainLocal -GroupCategory Security -Path "ou=Locaux,ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
+           Write-Host "Creating $($groupName0)"
+        }
     }
 }
 
