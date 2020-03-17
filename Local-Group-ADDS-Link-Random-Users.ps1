@@ -37,9 +37,11 @@ If ($answer -eq "N") {
 
 foreach ($partage in $partages) 
 {
+    New-Item -path "c:\" -Name "Partage" -ItemType directory # création du dossier Partage dans c:\
+
     foreach($rightType in $rightTypes)
     {
-       $groupName0 = "DL-$($partage)-$($rightType)"
+       $groupName0 = "DL-$($partage)-$($rootSites)-$($rightType)"
        Write-Host $groupName0
        New-ADGroup -Name "$groupName0" -GroupScope DomainLocal -GroupCategory Security -Path "ou=Locaux,ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
        Write-Host "Creating $($groupName0)"
@@ -50,9 +52,11 @@ foreach ($partage in $partages)
 {
     foreach ($rootSite in $rootSites) 
     {
+        New-Item -path "c:\Partage\" -Name "Sites" -ItemType directory # création du sous dossier Sites dans c:\
+
         foreach($rightType in $rightTypes)
         {
-           $groupName0 = "DL-$($partage)-$($rootSites)-$($rightType)"
+           $groupName0 = "DL-$($partage)-$($rightType)"
            Write-Host $groupName0
            New-ADGroup -Name "$groupName0" -GroupScope DomainLocal -GroupCategory Security -Path "ou=Locaux,ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
            Write-Host "Creating $($groupName0)"
@@ -66,6 +70,8 @@ foreach ($partage in $partages)
     {
         foreach ($site in $sites) # DL-Partage-Site-Paris-CT LM L
         {
+            New-Item -path "c:\Partage\Sites" -Name "$site" -ItemType directory # création des sous dossier dans c:\
+
             foreach($rightType in $rightTypes)
             {
                $groupName1 = "DL-$($partage)-$($rootSite)-$($site)-$($rightType)"
@@ -86,6 +92,8 @@ foreach ($partage in $partages)
         {
             foreach($service in $services)
             {
+                New-Item -path "c:\Partage\Sites\$site" -Name "$service" -ItemType directory # création des sous dossier dans c:\
+
                 foreach($rightType in $rightTypes)
                 {
                    $groupName2 = "DL-$($partage)-$($rootSite)-$($site)-$($service)-$($rightType)"
@@ -108,6 +116,9 @@ foreach ($partage in $partages)
             {
                 foreach($folder in $folders)
                 {
+
+                New-Item -path "c:\Partage\Sites\$site\$service" -Name "$folder" -ItemType directory # création des sous dossier dans c:\
+
                     foreach($rightType in $rightTypes)
                     {
                         $groupName3 = "DL-$($partage)-$($rootSite)-$($site)-$($service)-$($folder)-$($rightType)"
