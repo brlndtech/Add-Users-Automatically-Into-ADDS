@@ -37,10 +37,16 @@ $rightTypes = @("CT", "LM", "R") # permissions
 $netbios=Read-Host "Entrez le NetBIOS de votre domaine (ex : entreprise) "
 $domain=Read-Host "Entrez votre .tld (ex : .com) "
 
-New-ADOrganizationalUnit -Name "Sites" -Path "dc=$netbios,dc=$domain"
-New-ADOrganizationalUnit -Name "Groupes" -Path "ou=Sites,dc=$netbios,dc=$domain"
-New-ADOrganizationalUnit -Name "Globaux" -Path "ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
-New-ADOrganizationalUnit -Name "Locaux" -Path "ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
+$answer=Read-Host "L'aborescence du script ADDS Add Random User a été crée  ? (O/N)"
+
+If ($answer -eq "N") {
+
+    New-ADOrganizationalUnit -Name "Sites" -Path "dc=$netbios,dc=$domain"
+    New-ADOrganizationalUnit -Name "Groupes" -Path "ou=Sites,dc=$netbios,dc=$domain"
+    New-ADOrganizationalUnit -Name "Globaux" -Path "ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
+    New-ADOrganizationalUnit -Name "Locaux" -Path "ou=Groupes,ou=Sites,dc=$netbios,dc=$domain"
+
+}
 
 
 foreach ($partage in $partages) 
