@@ -5,6 +5,7 @@ on your Windows Server 2012-2019 do that :
 ```
 git clone https://github.com/brlndtech/add-random-users-into-your-adds
 ** run with powershell ** 
+.\setup.ps1
 ``` 
 
 **WARNING** : You need to be a local Administrator to run the program.
