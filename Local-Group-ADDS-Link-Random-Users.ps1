@@ -1,4 +1,4 @@
-﻿##### 
+﻿#####  
 if (Get-Module -ListAvailable -Name NTFSSecurity) {
     Write-Output "Module NTFSSecurity exists"
 } 
