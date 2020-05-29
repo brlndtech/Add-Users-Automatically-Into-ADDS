@@ -8,7 +8,11 @@ git clone https://github.com/brlndtech/add-random-users-into-your-adds
 .\setup.ps1
 ``` 
 
-**WARNING** : You need to be a local Administrator to run the program.
+**WARNING** : You need to be a local Administrator to run the program
+
+## prerequisite : 
+
+A internet connexion for download the module NTFS-Security is required. Else, you need to install it manually before runing the program :) 
 
 
 ## :point_right: Features & tools 
