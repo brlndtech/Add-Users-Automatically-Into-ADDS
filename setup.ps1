@@ -1,6 +1,7 @@
 ﻿######################################################
-#        CREATE AND POPULATE YOUR ADDS               #
-#          **A script by brlndtech **                #
+#                       PYAD                         #
+#          People Your Active Directory              #
+#          ** scripts by brlndtech **                #
 #      github : https://github.com/brlndtech         #
 #            Please RTFM README.md                   #
 #                        V6                          #
@@ -18,8 +19,9 @@ Import-Module ActiveDirectory
 Import-Module 'Microsoft.PowerShell.Security'
 Clear-Host
 Write-Host "*********************************"
-Write-Host "* CREATE AND POPULATE YOUR ADDS *"
-Write-Host "*   ~ A script by brlndtech ~   *"
+Write-Host "*             PYAD              *"
+Write-Host "* People Your Active Directory  *"
+Write-Host "*   ~ scripts by brlndtech ~    *"
 Write-Host "*     Please RTFM README.md     *"
 Write-Host "*        V7 - Stable            *"
 Write-Host "*********************************"
