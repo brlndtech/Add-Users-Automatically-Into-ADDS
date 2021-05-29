@@ -3,7 +3,7 @@
 on your Windows Server 2012-2019 do that : 
 
 ```
-git clone https://github.com/brlndtech/add-random-users-into-your-adds
+git clone https://github.com/archidote/Add-Users-Automatically-Into-ADDS-LDAP
 ** run with powershell ** 
 .\setup.ps1
 ``` 
@@ -31,5 +31,4 @@ If you choose the option 2), **be noticed that you should add other cities than 
 
 If you have a problem with the script, don't hesitate to run again the inital script from the github depot, and open an <a href="https://github.com/brlndtech/add-random-users-into-your-adds/issues" >issue. </a>
 
-#### <center>Brlndtech &copy; 2020</center>
 
